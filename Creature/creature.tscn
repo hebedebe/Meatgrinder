@@ -19,21 +19,21 @@ radius = 137.09122
 radius = 36.0
 
 [node name="Creature" type="CharacterBody2D" unique_id=1127173523]
+y_sort_enabled = true
 script = ExtResource("1_3raad")
 
 [node name="CreatureBodyShape" type="CollisionShape2D" parent="." unique_id=900781789]
 shape = SubResource("CircleShape2D_jydqk")
+disabled = true
 
 [node name="CreatureNavigator" type="Node2D" parent="." unique_id=728937444]
 script = ExtResource("2_jydqk")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CreatureNavigator" unique_id=1332513741]
 avoidance_enabled = true
-radius = 28.89
-debug_enabled = true
+radius = 16.0
 
 [node name="CreatureSprite" type="AnimatedSprite2D" parent="." unique_id=1385598192]
-z_as_relative = false
 y_sort_enabled = true
 position = Vector2(0, -15.5)
 sprite_frames = ExtResource("1_c4pxr")
@@ -68,3 +68,5 @@ script = ExtResource("5_cc14b")
 
 [node name="Eating" type="Node" parent="CreatureStateMachine" unique_id=2020915084]
 script = ExtResource("8_cp060")
+
+[connection signal="velocity_computed" from="CreatureNavigator/NavigationAgent2D" to="CreatureNavigator" method="_on_navigation_agent_2d_velocity_computed"]

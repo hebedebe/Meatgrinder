@@ -3,10 +3,32 @@
 [ext_resource type="TileSet" uid="uid://cnilhjpypx312" path="res://World/Tilesets/decoration_tiles.tres" id="1_8irvp"]
 [ext_resource type="PackedScene" uid="uid://dajbd5mj5oqj7" path="res://Player/player.tscn" id="1_37k63"]
 [ext_resource type="Script" uid="uid://f6nvdcktscbv" path="res://World/Scripts/populate_decorations.gd" id="2_3f78f"]
-[ext_resource type="PackedScene" uid="uid://bq2st2w4lbb4u" path="res://Creature/creature.tscn" id="2_fh37g"]
 [ext_resource type="TileSet" uid="uid://0gefacwlpgt1" path="res://World/Tilesets/structure_tileset.tres" id="3_k8do8"]
 [ext_resource type="Script" uid="uid://ddgbk7l7x74by" path="res://World/Scripts/populate_structures.gd" id="4_bkhv4"]
-[ext_resource type="PackedScene" uid="uid://dk05vaemou7b2" path="res://Food/food.tscn" id="6_yf0ba"]
+
+[sub_resource type="GDScript" id="GDScript_k8do8"]
+script/source = "extends Node2D
+
+@export var amount: int
+@export var range: float
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	for i in range(amount):
+		var x = randf_range(-range, range)
+		var y = randf_range(-range, range)
+		var creature = preload(\"res://Creature/creature.tscn\").instantiate()
+		add_child(creature)
+		creature.global_position = Vector2(x, y)
+		#print(\"Created creature at \", x, \", \", y)
+		
+	for i in range(amount):
+		var x = randf_range(-range, range)
+		var y = randf_range(-range, range)
+		var food = preload(\"res://Food/food.tscn\").instantiate()
+		add_child(food)
+		food.global_position = Vector2(x, y)
+"
 
 [node name="World" type="Node2D" unique_id=407893828]
 
@@ -34,38 +56,11 @@ rand_seed = 2387134
 tile_set = ExtResource("3_k8do8")
 script = ExtResource("4_bkhv4")
 
-[node name="Creature" parent="Terrain" unique_id=1127173523 instance=ExtResource("2_fh37g")]
-position = Vector2(381, 315)
-
-[node name="Creature2" parent="Terrain" unique_id=469261659 instance=ExtResource("2_fh37g")]
-position = Vector2(141, 324)
-
-[node name="Creature3" parent="Terrain" unique_id=1237298196 instance=ExtResource("2_fh37g")]
-position = Vector2(306, 113)
-
-[node name="Creature4" parent="Terrain" unique_id=721173140 instance=ExtResource("2_fh37g")]
-position = Vector2(392, 213)
-
-[node name="Creature5" parent="Terrain" unique_id=429587540 instance=ExtResource("2_fh37g")]
-position = Vector2(188, 269)
-
-[node name="Creature6" parent="Terrain" unique_id=1889168942 instance=ExtResource("2_fh37g")]
-position = Vector2(270, 327)
-
-[node name="Creature7" parent="Terrain" unique_id=75045152 instance=ExtResource("2_fh37g")]
-position = Vector2(337, 267)
-
-[node name="Creature8" parent="Terrain" unique_id=956555420 instance=ExtResource("2_fh37g")]
-position = Vector2(286, 263)
-
-[node name="Creature9" parent="Terrain" unique_id=599882783 instance=ExtResource("2_fh37g")]
-position = Vector2(317, 203)
-
-[node name="Food" parent="Terrain" unique_id=1842524663 instance=ExtResource("6_yf0ba")]
-position = Vector2(511, 212)
-
 [node name="Player" parent="." unique_id=1305749868 instance=ExtResource("1_37k63")]
 position = Vector2(59, 48)
 
-[node name="Creature" parent="." unique_id=2090223248 instance=ExtResource("2_fh37g")]
-position = Vector2(263, 221)
+[node name="CreatureSpawner" type="Node2D" parent="." unique_id=1348034480]
+y_sort_enabled = true
+script = SubResource("GDScript_k8do8")
+amount = 138
+range = 500.0

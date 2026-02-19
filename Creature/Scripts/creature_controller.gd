@@ -4,6 +4,7 @@ extends Node2D
 const DEFAULT_VALUE: float = 35;
 
 #region Depletion rates
+const DEPLETION_VARIANCE: float = 1;
 const FOOD_DEPLETION_RATE: float = 1;
 const SLEEP_DEPLETION_RATE: float = 1;
 #endregion
@@ -21,5 +22,6 @@ var sleep: float = DEFAULT_VALUE;
 
 
 func _process(delta: float) -> void:
-	food -= FOOD_DEPLETION_RATE * delta
-	sleep -= SLEEP_DEPLETION_RATE * delta
+	var variance = randf_range(-DEPLETION_VARIANCE, DEPLETION_VARIANCE);
+	food -= (FOOD_DEPLETION_RATE + variance) * delta
+	sleep -= (SLEEP_DEPLETION_RATE + variance) * delta

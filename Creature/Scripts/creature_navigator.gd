@@ -29,6 +29,15 @@ func _physics_process(delta: float) -> void:
 	
 	var current_agent_position = global_position;
 	var next_path_position = navigation_agent.get_next_path_position();
-	creature.velocity = current_agent_position.direction_to(next_path_position) * movement_speed;
+	var new_velocity = current_agent_position.direction_to(next_path_position) * movement_speed;
+	
+	if navigation_agent.avoidance_enabled:
+		navigation_agent.set_velocity_forced(new_velocity)
+	else:
+		_on_navigation_agent_2d_velocity_computed(new_velocity)
 	
 	creature.move_and_slide();
+
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
+	creature.velocity = safe_velocity

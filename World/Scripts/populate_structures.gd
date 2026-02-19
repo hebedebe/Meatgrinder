@@ -1,8 +1,8 @@
 class_name NavigationGenerator
 extends TileMapLayer
 
-const POPULATION_RADIUS: int = 8;
-const RADIUS_EXTENDER = 1;
+const POPULATION_RADIUS: int = 4;
+const RADIUS_EXTENDER = 2;
 
 var player: Player;
 var populatedChunks: Array[Vector2i] = []
