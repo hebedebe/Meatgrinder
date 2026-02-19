@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bq2st2w4lbb4u"]
+
+[ext_resource type="Script" uid="uid://s48l5qqgfydw" path="res://Creature/Scripts/creature_controller.gd" id="1_3raad"]
+[ext_resource type="SpriteFrames" uid="uid://b3whii0fgtatt" path="res://Creature/Animations/creature_idle.tres" id="1_c4pxr"]
+[ext_resource type="Script" uid="uid://pw8pfr8x8a6x" path="res://Creature/Scripts/creature_animator.gd" id="2_6l0wg"]
+[ext_resource type="Script" uid="uid://b4cos0744q1vf" path="res://Creature/Scripts/creature_navigator.gd" id="2_jydqk"]
+[ext_resource type="Script" uid="uid://qyu077ito5qv" path="res://Creature/Scripts/creature_state_machine.gd" id="4_tn5qs"]
+[ext_resource type="Script" uid="uid://cfelhnw78spii" path="res://Creature/Scripts/creature_awareness.gd" id="4_wdiu4"]
+[ext_resource type="Script" uid="uid://3u4k5yo1vtv8" path="res://Creature/Scripts/States/state_wandering.gd" id="5_cc14b"]
+[ext_resource type="Script" uid="uid://2dsf0wb6p52v" path="res://Creature/Scripts/States/state_eating.gd" id="8_cp060"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jydqk"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cc14b"]
+radius = 137.09122
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cp060"]
+radius = 36.0
+
+[node name="Creature" type="CharacterBody2D" unique_id=1127173523]
+script = ExtResource("1_3raad")
+
+[node name="CreatureBodyShape" type="CollisionShape2D" parent="." unique_id=900781789]
+shape = SubResource("CircleShape2D_jydqk")
+
+[node name="CreatureNavigator" type="Node2D" parent="." unique_id=728937444]
+script = ExtResource("2_jydqk")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CreatureNavigator" unique_id=1332513741]
+avoidance_enabled = true
+radius = 28.89
+debug_enabled = true
+
+[node name="CreatureSprite" type="AnimatedSprite2D" parent="." unique_id=1385598192]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(0, -15.5)
+sprite_frames = ExtResource("1_c4pxr")
+frame_progress = 0.37109035
+script = ExtResource("2_6l0wg")
+
+[node name="CreatureAwareness" type="Area2D" parent="." unique_id=468245937]
+monitorable = false
+script = ExtResource("4_wdiu4")
+
+[node name="CreatureAwarenessShape" type="CollisionShape2D" parent="CreatureAwareness" unique_id=505907147]
+z_index = -1
+shape = SubResource("CircleShape2D_cc14b")
+debug_color = Color(0.56574124, 0.5581462, 0, 0.41960785)
+
+[node name="CreatureInteraction" type="Area2D" parent="." unique_id=2002795519]
+monitorable = false
+
+[node name="CreatureInteractionShape" type="CollisionShape2D" parent="CreatureInteraction" unique_id=1689213743]
+z_index = -1
+shape = SubResource("CircleShape2D_cp060")
+debug_color = Color(0.10106257, 0.64854217, 0, 0.41960785)
+
+[node name="CreatureStateMachine" type="Node" parent="." unique_id=305370366 node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_tn5qs")
+current_state = NodePath("Wandering")
+
+[node name="Wandering" type="Node" parent="CreatureStateMachine" unique_id=647272612]
+script = ExtResource("5_cc14b")
+
+[node name="WanderTimer" type="Timer" parent="CreatureStateMachine/Wandering" unique_id=1774426703]
+
+[node name="Eating" type="Node" parent="CreatureStateMachine" unique_id=2020915084]
+script = ExtResource("8_cp060")

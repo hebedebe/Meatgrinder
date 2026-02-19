@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://wxjxca22cl5e"]
+
+[ext_resource type="TileSet" uid="uid://cnilhjpypx312" path="res://World/Tilesets/decoration_tiles.tres" id="1_8irvp"]
+[ext_resource type="PackedScene" uid="uid://dajbd5mj5oqj7" path="res://Player/player.tscn" id="1_37k63"]
+[ext_resource type="Script" uid="uid://f6nvdcktscbv" path="res://World/Scripts/populate_decorations.gd" id="2_3f78f"]
+[ext_resource type="PackedScene" uid="uid://bq2st2w4lbb4u" path="res://Creature/creature.tscn" id="2_fh37g"]
+[ext_resource type="TileSet" uid="uid://0gefacwlpgt1" path="res://World/Tilesets/structure_tileset.tres" id="3_k8do8"]
+[ext_resource type="Script" uid="uid://ddgbk7l7x74by" path="res://World/Scripts/populate_structures.gd" id="4_bkhv4"]
+[ext_resource type="PackedScene" uid="uid://dk05vaemou7b2" path="res://Food/food.tscn" id="6_yf0ba"]
+
+[node name="World" type="Node2D" unique_id=407893828]
+
+[node name="Terrain" type="Node2D" parent="." unique_id=1076672658]
+
+[node name="Fullscreen" type="CanvasLayer" parent="Terrain" unique_id=183018901]
+layer = -2
+
+[node name="Background" type="ColorRect" parent="Terrain/Fullscreen" unique_id=1235849317]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.56078434, 0.5921569, 0.2901961, 1)
+
+[node name="Decorations" type="TileMapLayer" parent="Terrain" unique_id=852900849]
+tile_set = ExtResource("1_8irvp")
+collision_enabled = false
+script = ExtResource("2_3f78f")
+rand_seed = 2387134
+
+[node name="Structures" type="TileMapLayer" parent="Terrain" unique_id=1637489038 groups=["navigation"]]
+tile_set = ExtResource("3_k8do8")
+script = ExtResource("4_bkhv4")
+
+[node name="Creature" parent="Terrain" unique_id=1127173523 instance=ExtResource("2_fh37g")]
+position = Vector2(381, 315)
+
+[node name="Creature2" parent="Terrain" unique_id=469261659 instance=ExtResource("2_fh37g")]
+position = Vector2(141, 324)
+
+[node name="Creature3" parent="Terrain" unique_id=1237298196 instance=ExtResource("2_fh37g")]
+position = Vector2(306, 113)
+
+[node name="Creature4" parent="Terrain" unique_id=721173140 instance=ExtResource("2_fh37g")]
+position = Vector2(392, 213)
+
+[node name="Creature5" parent="Terrain" unique_id=429587540 instance=ExtResource("2_fh37g")]
+position = Vector2(188, 269)
+
+[node name="Creature6" parent="Terrain" unique_id=1889168942 instance=ExtResource("2_fh37g")]
+position = Vector2(270, 327)
+
+[node name="Creature7" parent="Terrain" unique_id=75045152 instance=ExtResource("2_fh37g")]
+position = Vector2(337, 267)
+
+[node name="Creature8" parent="Terrain" unique_id=956555420 instance=ExtResource("2_fh37g")]
+position = Vector2(286, 263)
+
+[node name="Creature9" parent="Terrain" unique_id=599882783 instance=ExtResource("2_fh37g")]
+position = Vector2(317, 203)
+
+[node name="Food" parent="Terrain" unique_id=1842524663 instance=ExtResource("6_yf0ba")]
+position = Vector2(511, 212)
+
+[node name="Player" parent="." unique_id=1305749868 instance=ExtResource("1_37k63")]
+position = Vector2(59, 48)
+
+[node name="Creature" parent="." unique_id=2090223248 instance=ExtResource("2_fh37g")]
+position = Vector2(263, 221)

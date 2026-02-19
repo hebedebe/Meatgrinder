@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dk05vaemou7b2"]
+
+[ext_resource type="Script" uid="uid://dynehdifr5pyp" path="res://Food/Scripts/food.gd" id="1_5cxgk"]
+[ext_resource type="Script" uid="uid://dosqvobxb1h2u" path="res://Food/Scripts/food_area.gd" id="2_i3b5u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5cxgk"]
+radius = 20.0
+
+[node name="Food" type="Node2D" unique_id=1842524663]
+script = ExtResource("1_5cxgk")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=939551534]
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 21.0
+offset_bottom = 21.0
+color = Color(1, 0, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1550697414]
+monitoring = false
+script = ExtResource("2_i3b5u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1305851248]
+shape = SubResource("CircleShape2D_5cxgk")

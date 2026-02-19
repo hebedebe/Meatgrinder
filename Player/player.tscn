@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dajbd5mj5oqj7"]
+
+[ext_resource type="Script" uid="uid://ctovnnfog10po" path="res://Player/Scripts/player_movement.gd" id="1_3qydi"]
+[ext_resource type="Script" uid="uid://bbcol3y2ufpsj" path="res://Player/Scripts/player.gd" id="1_fhl08"]
+[ext_resource type="Texture2D" uid="uid://dmddisbkyd5fy" path="res://Player/Sprites/open_hand.png" id="2_q3lat"]
+[ext_resource type="Script" uid="uid://sj1e83gft2jr" path="res://Player/Scripts/player_interactor.gd" id="2_tok1r"]
+[ext_resource type="Script" uid="uid://di58mg2f7gblg" path="res://Player/Scripts/hand_sprite.gd" id="4_ddoul"]
+[ext_resource type="Texture2D" uid="uid://bg7i3xnakt8lu" path="res://icon.svg" id="5_8g4oa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ysni"]
+radius = 87.005745
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8g4oa"]
+radius = 161.37534
+
+[node name="Player" type="Camera2D" unique_id=1305749868 groups=["player"]]
+script = ExtResource("1_fhl08")
+
+[node name="Movement" type="Node" parent="." unique_id=414262549]
+script = ExtResource("1_3qydi")
+
+[node name="Hand" type="Node2D" parent="." unique_id=1671295649]
+script = ExtResource("2_tok1r")
+
+[node name="HandSprite" type="Sprite2D" parent="Hand" unique_id=2004268131]
+z_index = 1
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_q3lat")
+script = ExtResource("4_ddoul")
+open_hand_sprite = ExtResource("2_q3lat")
+closed_hand_sprite = ExtResource("5_8g4oa")
+
+[node name="TouchingHandArea" type="Area2D" parent="Hand" unique_id=240910307]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/TouchingHandArea" unique_id=1234359763]
+shape = SubResource("CircleShape2D_6ysni")
+debug_color = Color(0.32267833, 0.6248632, 0, 0.41960785)
+
+[node name="NearHandArea" type="Area2D" parent="Hand" unique_id=1675986660]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/NearHandArea" unique_id=1150819114]
+shape = SubResource("CircleShape2D_8g4oa")

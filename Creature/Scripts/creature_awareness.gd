@@ -1,0 +1,2 @@
+class_name CreatureAwareness
+extends Area2D
