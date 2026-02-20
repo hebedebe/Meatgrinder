@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dx2cv1snbhubi"]
+
+[ext_resource type="PackedScene" uid="uid://dk05vaemou7b2" path="res://Food/food.tscn" id="1_swwmx"]
+[ext_resource type="Texture2D" uid="uid://lwac75tix1yo" path="res://Food/Sprites/vomit.png" id="2_x2eeb"]
+
+[sub_resource type="GDScript" id="GDScript_x2eeb"]
+script/source = "extends Food
+
+const VOMIT_CHANCE: float = 70;
+
+func on_eaten(creature: Creature):
+	if randf_range(0, 100) < VOMIT_CHANCE:
+		creature.vomit()
+"
+
+[node name="Food" unique_id=1842524663 instance=ExtResource("1_swwmx")]
+script = SubResource("GDScript_x2eeb")
+satiation = 15.0
+time_to_eat = 1.5
+hunger_threshold = 7.0
+
+[node name="Sprite2D" parent="." index="0" unique_id=491944740]
+z_index = -1
+position = Vector2(0, 0)
+texture = ExtResource("2_x2eeb")
+
+[node name="Shadow" parent="." index="2" unique_id=1447970272]
+visible = false

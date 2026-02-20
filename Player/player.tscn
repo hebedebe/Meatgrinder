@@ -20,6 +20,7 @@ script = ExtResource("1_fhl08")
 script = ExtResource("1_3qydi")
 
 [node name="Hand" type="Node2D" parent="." unique_id=1671295649]
+visible = false
 script = ExtResource("2_tok1r")
 
 [node name="HandSprite" type="Sprite2D" parent="Hand" unique_id=2004268131]

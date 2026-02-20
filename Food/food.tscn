@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://dk05vaemou7b2"]
 
 [ext_resource type="Script" uid="uid://dynehdifr5pyp" path="res://Food/Scripts/food.gd" id="1_5cxgk"]
+[ext_resource type="Texture2D" uid="uid://baiqggv464iuq" path="res://Food/Sprites/food.png" id="2_acobj"]
 [ext_resource type="Script" uid="uid://dosqvobxb1h2u" path="res://Food/Scripts/food_area.gd" id="2_i3b5u"]
+[ext_resource type="PackedScene" uid="uid://6akirrtn0fxv" path="res://Shadow/shadow.tscn" id="4_358ee"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5cxgk"]
-radius = 20.0
+radius = 15.033297
 
 [node name="Food" type="Node2D" unique_id=1842524663]
+y_sort_enabled = true
 script = ExtResource("1_5cxgk")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=939551534]
-offset_left = -19.0
-offset_top = -19.0
-offset_right = 21.0
-offset_bottom = 21.0
-color = Color(1, 0, 0, 1)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=491944740]
+position = Vector2(0, 0.025)
+texture = ExtResource("2_acobj")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1550697414]
 monitoring = false
@@ -22,3 +22,7 @@ script = ExtResource("2_i3b5u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1305851248]
 shape = SubResource("CircleShape2D_5cxgk")
+
+[node name="Shadow" parent="." unique_id=1447970272 instance=ExtResource("4_358ee")]
+position = Vector2(0, 8.5)
+scale = Vector2(1, 0.46875)

@@ -6,8 +6,11 @@ var movement_speed: float = 0; #will get set by states
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var creature: CharacterBody2D = $".."
 
+func get_populator() -> NavigationGenerator:
+	return get_tree().get_first_node_in_group("navigation")
+
 func set_target_position(target_position: Vector2) -> void:
-	get_tree().get_first_node_in_group("navigation").populate_location(target_position)
+	get_populator().populate_location(target_position)
 	navigation_agent.target_position = target_position
 	
 func get_target_position() -> Vector2:
@@ -15,7 +18,7 @@ func get_target_position() -> Vector2:
 	
 func get_next_path_position() -> Vector2:
 	var next_position = navigation_agent.get_next_path_position()
-	get_tree().get_first_node_in_group("navigation").populate_location(next_position)
+	get_populator().populate_location(next_position)
 	return next_position
 
 func stop_pathfinding():

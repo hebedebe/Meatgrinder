@@ -2,17 +2,19 @@
 
 [ext_resource type="Texture2D" uid="uid://cgmcxg68j1wp" path="res://World/Sprites/empty_cell.png" id="1_1o5ex"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_urod2"]
-vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1o5ex"]
+vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mg3bq"]
 texture = ExtResource("1_1o5ex")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_urod2")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_1o5ex")
 
 [resource]
+tile_size = Vector2i(32, 32)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_mg3bq")

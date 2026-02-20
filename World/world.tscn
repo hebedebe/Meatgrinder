@@ -30,6 +30,13 @@ func _ready() -> void:
 		food.global_position = Vector2(x, y)
 "
 
+[sub_resource type="GDScript" id="GDScript_bkhv4"]
+script/source = "extends Label
+
+func _process(delta: float) -> void:
+	text = \"FPS: %s\" % Engine.get_frames_per_second()
+"
+
 [node name="World" type="Node2D" unique_id=407893828]
 
 [node name="Terrain" type="Node2D" parent="." unique_id=1076672658]
@@ -38,7 +45,7 @@ func _ready() -> void:
 layer = -2
 
 [node name="Background" type="ColorRect" parent="Terrain/Fullscreen" unique_id=1235849317]
-z_index = -1
+z_index = -10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -47,6 +54,7 @@ grow_vertical = 2
 color = Color(0.56078434, 0.5921569, 0.2901961, 1)
 
 [node name="Decorations" type="TileMapLayer" parent="Terrain" unique_id=852900849]
+z_index = -2
 tile_set = ExtResource("1_8irvp")
 collision_enabled = false
 script = ExtResource("2_3f78f")
@@ -62,5 +70,12 @@ position = Vector2(59, 48)
 [node name="CreatureSpawner" type="Node2D" parent="." unique_id=1348034480]
 y_sort_enabled = true
 script = SubResource("GDScript_k8do8")
-amount = 138
+amount = 20
 range = 500.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=538612988]
+
+[node name="FPS" type="Label" parent="CanvasLayer" unique_id=1549673403]
+offset_right = 40.0
+offset_bottom = 23.0
+script = SubResource("GDScript_bkhv4")

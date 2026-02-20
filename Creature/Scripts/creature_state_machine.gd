@@ -16,3 +16,6 @@ func set_state(state: CreatureState):
 		current_state.state_exit();
 	current_state = state;
 	current_state.state_enter();
+
+func get_state() -> CreatureState:
+	return current_state

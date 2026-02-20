@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://6akirrtn0fxv"]
+
+[ext_resource type="Texture2D" uid="uid://62ineui4300m" path="res://Shadow/Sprites/drop_shadow.png" id="1_fvijh"]
+
+[node name="Shadow" type="Sprite2D" unique_id=1447970272]
+modulate = Color(1, 1, 0.18039216, 1)
+z_index = -1
+scale = Vector2(1, 0.5)
+texture = ExtResource("1_fvijh")

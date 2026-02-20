@@ -8,15 +8,38 @@
 [ext_resource type="Script" uid="uid://cfelhnw78spii" path="res://Creature/Scripts/creature_awareness.gd" id="4_wdiu4"]
 [ext_resource type="Script" uid="uid://3u4k5yo1vtv8" path="res://Creature/Scripts/States/state_wandering.gd" id="5_cc14b"]
 [ext_resource type="Script" uid="uid://2dsf0wb6p52v" path="res://Creature/Scripts/States/state_eating.gd" id="8_cp060"]
+[ext_resource type="Script" uid="uid://dqr2rlegw1n72" path="res://Creature/Scripts/States/state_attacking.gd" id="9_lmmd4"]
+[ext_resource type="PackedScene" uid="uid://6akirrtn0fxv" path="res://Shadow/shadow.tscn" id="10_8v3qu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jydqk"]
-radius = 15.0
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cc14b"]
-radius = 137.09122
+radius = 229.1397
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cp060"]
 radius = 36.0
+
+[sub_resource type="GDScript" id="GDScript_lmmd4"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = $\"../../CreatureStateMachine\".get_state().name
+"
+
+[sub_resource type="GDScript" id="GDScript_8v3qu"]
+script/source = "extends Label
+
+func _process(delta: float) -> void:
+	text = \"food: %s\" % $\"../..\".food
+"
 
 [node name="Creature" type="CharacterBody2D" unique_id=1127173523]
 y_sort_enabled = true
@@ -24,18 +47,18 @@ script = ExtResource("1_3raad")
 
 [node name="CreatureBodyShape" type="CollisionShape2D" parent="." unique_id=900781789]
 shape = SubResource("CircleShape2D_jydqk")
-disabled = true
 
 [node name="CreatureNavigator" type="Node2D" parent="." unique_id=728937444]
 script = ExtResource("2_jydqk")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CreatureNavigator" unique_id=1332513741]
-avoidance_enabled = true
-radius = 16.0
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
+simplify_path = true
 
 [node name="CreatureSprite" type="AnimatedSprite2D" parent="." unique_id=1385598192]
-y_sort_enabled = true
-position = Vector2(0, -15.5)
+position = Vector2(0, -21.27)
 sprite_frames = ExtResource("1_c4pxr")
 frame_progress = 0.37109035
 script = ExtResource("2_6l0wg")
@@ -57,6 +80,35 @@ z_index = -1
 shape = SubResource("CircleShape2D_cp060")
 debug_color = Color(0.10106257, 0.64854217, 0, 0.41960785)
 
+[node name="Debug" type="Control" parent="." unique_id=1307470071]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="State" type="Label" parent="Debug" unique_id=935270175]
+layout_mode = 0
+offset_left = -44.0
+offset_top = -80.0
+offset_right = 43.0
+offset_bottom = -57.0
+text = "None"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = SubResource("GDScript_lmmd4")
+
+[node name="Hunger" type="Label" parent="Debug" unique_id=946736728]
+layout_mode = 0
+offset_left = -44.0
+offset_top = -63.0
+offset_right = 43.0
+offset_bottom = -40.0
+text = "None"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = SubResource("GDScript_8v3qu")
+
 [node name="CreatureStateMachine" type="Node" parent="." unique_id=305370366 node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_tn5qs")
 current_state = NodePath("Wandering")
@@ -68,5 +120,12 @@ script = ExtResource("5_cc14b")
 
 [node name="Eating" type="Node" parent="CreatureStateMachine" unique_id=2020915084]
 script = ExtResource("8_cp060")
+
+[node name="Attacking" type="Node" parent="CreatureStateMachine" unique_id=1338029538]
+script = ExtResource("9_lmmd4")
+
+[node name="Shadow" parent="." unique_id=1447970272 instance=ExtResource("10_8v3qu")]
+position = Vector2(0, 2)
+scale = Vector2(1, 0.5)
 
 [connection signal="velocity_computed" from="CreatureNavigator/NavigationAgent2D" to="CreatureNavigator" method="_on_navigation_agent_2d_velocity_computed"]
