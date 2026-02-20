@@ -12,7 +12,7 @@ func eat(creature: Creature):
 	on_eaten(creature)
 	queue_free()
 	
-func on_eaten(creature: Creature):
+func on_eaten(_creature: Creature):
 	pass
 	
 func is_eaten() -> bool:

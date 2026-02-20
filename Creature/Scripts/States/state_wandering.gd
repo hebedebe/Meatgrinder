@@ -40,6 +40,6 @@ func wander_timeout():
 	scramble_wander_time();
 	wander_timer.start();
 
-func creature_awareness_entered(area: Area2D):
+func creature_awareness_entered(_area: Area2D):
 	#print(area)
 	pass

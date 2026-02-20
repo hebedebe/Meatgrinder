@@ -17,7 +17,7 @@ const HUNGER_MURDER_THRESHOLD: float = 10;
 #endregion
 
 #region necessities
-var food: float = 10;
+var food: float = DEFAULT_VALUE;
 var fear: float = DEFAULT_VALUE;
 var sleep: float = DEFAULT_VALUE;
 var health: float = DEFAULT_VALUE;
@@ -53,9 +53,9 @@ func damage(amount: float):
 	
 func die():
 	print("Died")
-	var food: Food = preload("res://Food/Variants/corpse.tscn").instantiate()
-	get_parent().add_child(food);
-	food.global_position = global_position
+	var food_instance: Food = preload("res://Food/Variants/corpse.tscn").instantiate()
+	get_parent().add_child(food_instance);
+	food_instance.global_position = global_position
 	queue_free()
 	
 func vomit():

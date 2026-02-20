@@ -13,7 +13,7 @@ func on_process(_delta: float):
 		return;
 	
 	#Find food
-	var closest_food: Food;
+	var closest_food: Food = null;
 	var closest_distance: float;
 	
 	var surrounding_areas = creature_awareness.get_overlapping_areas();
@@ -43,7 +43,7 @@ func on_process(_delta: float):
 		creature_navigator.set_target_position(target_food.global_position)
 		
 		
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not is_active(): return
 	for area in creature_interaction.get_overlapping_areas():
 		if not area: continue

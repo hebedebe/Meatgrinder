@@ -10,21 +10,21 @@
 script/source = "extends Node2D
 
 @export var amount: int
-@export var range: float
+@export var spawn_range: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in range(amount):
-		var x = randf_range(-range, range)
-		var y = randf_range(-range, range)
+		var x = randf_range(-spawn_range, spawn_range)
+		var y = randf_range(-spawn_range, spawn_range)
 		var creature = preload(\"res://Creature/creature.tscn\").instantiate()
 		add_child(creature)
 		creature.global_position = Vector2(x, y)
 		#print(\"Created creature at \", x, \", \", y)
 		
 	for i in range(amount):
-		var x = randf_range(-range, range)
-		var y = randf_range(-range, range)
+		var x = randf_range(-spawn_range, spawn_range)
+		var y = randf_range(-spawn_range, spawn_range)
 		var food = preload(\"res://Food/food.tscn\").instantiate()
 		add_child(food)
 		food.global_position = Vector2(x, y)
@@ -33,7 +33,7 @@ func _ready() -> void:
 [sub_resource type="GDScript" id="GDScript_bkhv4"]
 script/source = "extends Label
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	text = \"FPS: %s\" % Engine.get_frames_per_second()
 "
 
@@ -54,7 +54,7 @@ grow_vertical = 2
 color = Color(0.56078434, 0.5921569, 0.2901961, 1)
 
 [node name="Decorations" type="TileMapLayer" parent="Terrain" unique_id=852900849]
-z_index = -2
+z_index = -9
 tile_set = ExtResource("1_8irvp")
 collision_enabled = false
 script = ExtResource("2_3f78f")
@@ -70,8 +70,8 @@ position = Vector2(59, 48)
 [node name="CreatureSpawner" type="Node2D" parent="." unique_id=1348034480]
 y_sort_enabled = true
 script = SubResource("GDScript_k8do8")
-amount = 20
-range = 500.0
+amount = 200
+spawn_range = 200.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=538612988]
 

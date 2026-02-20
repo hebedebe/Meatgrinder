@@ -9,7 +9,7 @@ const TILES_PER_FRAME: int = 20
 var populated_chunks := {}   # key: Vector2i, value: true
 var queued_cells: Array[Vector2i]
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for i in range(TILES_PER_FRAME):
 		if queued_cells.is_empty(): return
 		set_cell(queued_cells[0], 0, Vector2i(0,0))
@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 
 func populate_location(location: Vector2) -> void:
 	var tile_pos: Vector2i = local_to_map(location)
+	@warning_ignore("integer_division")
 	var player_chunk_pos: Vector2i = tile_pos / POPULATION_RADIUS
 	
 	var start_pos := player_chunk_pos - Vector2i(RADIUS_EXTENDER, RADIUS_EXTENDER)

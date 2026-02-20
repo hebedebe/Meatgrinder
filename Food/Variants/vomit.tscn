@@ -20,7 +20,7 @@ time_to_eat = 1.5
 hunger_threshold = 7.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=491944740]
-z_index = -1
+z_index = -8
 position = Vector2(0, 0)
 texture = ExtResource("2_x2eeb")
 
